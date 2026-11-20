@@ -1,0 +1,11 @@
+import { cp, mkdir, readFile } from 'node:fs/promises';
+import { validatePrices, forecast } from '../lib/model.mjs';
+const data = JSON.parse(await readFile('data/prices.json', 'utf8'));
+const seasons = JSON.parse(await readFile('data/seasons.json', 'utf8'));
+validatePrices(data.prices);
+forecast(data.prices, seasons);
+await mkdir('dist', { recursive: true });
+await cp('web', 'dist', { recursive: true });
+await cp('lib', 'dist/lib', { recursive: true });
+await cp('data', 'dist/data', { recursive: true });
+console.log('Built dist/ for GitHub Pages');

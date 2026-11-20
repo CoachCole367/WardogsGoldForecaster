@@ -1,0 +1,378 @@
+{
+  "checkedAt": "2026-11-20T21:42:57.415Z",
+  "sources": [
+    {
+      "url": "https://wardogstats.app/gold",
+      "ok": true,
+      "latest": "2026-11-20"
+    },
+    {
+      "url": "https://wardogs.tools/gold",
+      "ok": true,
+      "latest": "2026-11-20"
+    }
+  ],
+  "warnings": [],
+  "prices": [
+    {
+      "date": "2026-09-10",
+      "price": 2798240,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-11",
+      "price": 2413120,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-12",
+      "price": 2303752,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-13",
+      "price": 2303752,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-14",
+      "price": 2067814,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-15",
+      "price": 2113114,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-16",
+      "price": 1774565,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-17",
+      "price": 1547240,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-18",
+      "price": 1470113,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-19",
+      "price": 1558250,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-20",
+      "price": 1558250,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-21",
+      "price": 1672688,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-22",
+      "price": 1797600,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-23",
+      "price": 1685515,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-24",
+      "price": 1691553,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-25",
+      "price": 1510085,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-26",
+      "price": 1568628,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-27",
+      "price": 1568628,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-28",
+      "price": 1627740,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-29",
+      "price": 1418305,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-09-30",
+      "price": 812640,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-01",
+      "price": 694217,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-02",
+      "price": 331582,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-03",
+      "price": 166000,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-04",
+      "price": 166000,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-05",
+      "price": 492453,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-06",
+      "price": 459112,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-07",
+      "price": 326749,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-08",
+      "price": 447691,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-09",
+      "price": 407388,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-10",
+      "price": 272761,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-11",
+      "price": 272761,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-12",
+      "price": 345880,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-13",
+      "price": 229361,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-14",
+      "price": 281880,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-15",
+      "price": 253947,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-16",
+      "price": 557480,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-17",
+      "price": 701250,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-18",
+      "price": 701250,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-19",
+      "price": 938215,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-20",
+      "price": 1003600,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-21",
+      "price": 968330,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-22",
+      "price": 1042770,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-23",
+      "price": 911480,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-24",
+      "price": 862150,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-25",
+      "price": 862150,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-26",
+      "price": 694330,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-27",
+      "price": 641905,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-28",
+      "price": 538270,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-29",
+      "price": 330410,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-30",
+      "price": 251032,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-10-31",
+      "price": 418650,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-01",
+      "price": 418650,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-02",
+      "price": 396210,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-03",
+      "price": 548930,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-04",
+      "price": 512370,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-05",
+      "price": 641920,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-06",
+      "price": 612380,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-07",
+      "price": 427520,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-08",
+      "price": 427520,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-09",
+      "price": 281410,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-10",
+      "price": 548843,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-11",
+      "price": 590138,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-12",
+      "price": 684753,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-13",
+      "price": 842752,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-14",
+      "price": 896944,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-15",
+      "price": 896944,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-16",
+      "price": 1079574,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-17",
+      "price": 1254108,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-18",
+      "price": 948265,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-19",
+      "price": 682500,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-20",
+      "price": 621425,
+      "source": "https://wardogstats.app/gold"
+    }
+  ]
+}
