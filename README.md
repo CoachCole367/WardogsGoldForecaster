@@ -18,7 +18,7 @@ Open http://127.0.0.1:4173. Rebuild after editing source files. `dist/` is gener
 
 ## GitHub Pages
 
-In repository **Settings → Pages → Build and deployment**, select **GitHub Actions**. The `Refresh and deploy Pages` workflow runs on pushes to `main`, manually, and at 00:20, 06:20 and 12:20 UTC. It fetches observations, runs checks, preserves data in Git, builds the static site, and deploys Pages. No API keys or paid services are needed. Scheduled Actions can be delayed or disabled by GitHub after prolonged repository inactivity.
+In repository **Settings → Pages → Build and deployment**, select **GitHub Actions**. The `Refresh and deploy Pages` workflow runs on pushes to `main`, manually, and once daily at 00:20 UTC. It fetches observations, runs checks, preserves data in Git, builds the static site, and deploys Pages. No API keys or paid services are needed. Scheduled Actions can be delayed or disabled by GitHub after prolonged repository inactivity.
 
 Expected URL: https://coachcole367.github.io/WardogsGoldForecaster/
 
