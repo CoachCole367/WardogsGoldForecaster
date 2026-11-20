@@ -47,3 +47,8 @@ test('missing observation dates do not become fabricated daily prices', () => {
   const errors = historicalErrors(missing, seasons);
   assert.ok(errors.every(sample => sample.every(e => e.target !== fixture[30].date)));
 });
+test('source dates roll backward across New Year, including stale December data', () => {
+  const html = '<tr><td>Jan 2</td><td>$300</td></tr><tr><td>Jan 1</td><td>$200</td></tr><tr><td>Dec 31</td><td>$100</td></tr>';
+  assert.deepEqual(parseHistory(html, 2027, 'fixture', '2027-01-02').map(p => p.date), ['2026-12-31', '2027-01-01', '2027-01-02']);
+  assert.equal(parseHistory('<tr><td>Dec 31</td><td>$100</td></tr>', 2027, 'fixture', '2027-01-02')[0].date, '2026-12-31');
+});

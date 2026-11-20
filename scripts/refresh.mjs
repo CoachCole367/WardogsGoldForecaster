@@ -11,10 +11,10 @@ const results = await Promise.all(sources.map(async url => {
   try {
     const response = await fetch(url, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'WardogsGoldForecaster/1.0 (+https://github.com/CoachCole367/WardogsGoldForecaster)' } });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    // Tables without a year are ambiguous after New Year. Retain history until the adapter is updated.
-    if (now.getUTCFullYear() !== 2026) throw new Error('Yearless source dates need a verified adapter for the new year');
-    const prices = parseHistory(await response.text(), 2026, url);
+    // Both source tables list newest first. Infer year rollovers only for yearless rows.
+    const prices = parseHistory(await response.text(), now.getUTCFullYear(), url, today);
     if (prices.length < 14 || prices.some(p => p.date > today)) throw new Error('Incomplete or future-dated history');
+    if (previous && !prices.some(p => previous.prices.some(old => old.date === p.date && old.price === p.price))) throw new Error('Source no longer overlaps retained history; verify the date adapter');
     return { url, ok: true, prices, latest: prices.at(-1).date };
   } catch (error) { return { url, ok: false, error: error.message }; }
 }));
