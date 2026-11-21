@@ -1,10 +1,23 @@
 import { forecast, seasonFor, dateAdd, mean } from './lib/model.mjs';
+import { validateArchive, liveErrorsFrom, archiveSummary, archivedScores } from './lib/archive.mjs';
 const $ = id => document.getElementById(id);
 const money = n => n == null ? 'Unavailable' : '$' + Math.round(n).toLocaleString('en-US');
 const compact = n => '$' + (n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : Math.round(n / 1000) + 'k');
 const pct = n => (n > 0 ? '+' : '') + (n * 100).toFixed(1) + '%';
 const fmtDate = date => new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(date + 'T00:00:00Z'));
-let data, seasons, result;
+let data, seasons, result, archive;
+const percentOrPending = value => value == null ? 'Pending' : (value * 100).toFixed(1) + '%';
+function renderLearning(snapshot) {
+  const level = Math.round(result.level * 100);
+  const summary = archiveSummary(archive, seasons, level);
+  const scores = archivedScores(archive, seasons, level);
+  const pending = archive.entries.reduce((sum, e) => sum + 7 - e.outcomes.length, 0);
+  const calibration = result.rows[0].calibration;
+  $('learning-metrics').innerHTML = `<div><strong>${archive.entries.length}</strong><span>Saved seven-day forecasts</span></div><div><strong>${scores.length}</strong><span>Daily predictions scored</span></div><div><strong>${pending}</strong><span>Waiting for actual prices</span></div><div><strong>${Math.round(calibration.liveWeight * 100)}%</strong><span>Live error weight for tomorrow</span></div>`;
+  $('learning-status').textContent = snapshot ? `This outlook was saved ${new Date(snapshot.issuedAt).toLocaleString(undefined, { timeZoneName: 'short' })}. Its estimates and percentages stay unchanged. ${scores.length ? 'New outcomes will adjust the next saved outlook.' : 'No outcomes yet; learning starts as the next daily prices arrive.'}` : 'No saved outlook for the latest observation. This preview is not counted as a recorded prediction; a fresh successful daily refresh will save one.';
+  $('learning-rows').innerHTML = summary.map(s => `<tr><td>Day ${s.horizon}</td><td>${s.scored}</td><td>${percentOrPending(s.coverage)}</td><td>${percentOrPending(s.error)}</td><td>${s.brier == null ? 'Pending' : s.brier.toFixed(3)}</td><td>${result.rows[s.horizon - 1].calibration.liveSamples}</td></tr>`).join('');
+  $('recent-scores').innerHTML = scores.length ? [...scores].reverse().slice(0, 14).map(s => `<tr><td>${fmtDate(s.origin)}</td><td>${fmtDate(s.target)}</td><td>Day ${s.horizon}</td><td>${money(s.price)}</td><td>${money(s.actualPrice)}</td><td>${percentOrPending(s.error)}</td><td>${s.covered == null ? 'No range' : s.covered ? 'Inside' : 'Outside'}${s.eligible ? '' : ' · excluded from learning'}</td></tr>`).join('') : '<tr><td colspan="7">No resolved predictions yet. The first comparison appears after the next daily price is recorded.</td></tr>';
+}
 function chart() {
   const count = $('history').value;
   const history = count === 'all' ? data.prices : data.prices.slice(-Number(count));
@@ -50,7 +63,9 @@ function calculator() {
   $('cash-range').textContent = end.low == null ? 'Insufficient history for a range.' : `Day seven range: ${Math.floor(cash / end.high).toLocaleString('en-US')}–${Math.floor(cash / end.low).toLocaleString('en-US')} whole bars at the ${Math.round(result.level * 100)}% price interval.`;
 }
 function render() {
-  result = forecast(data.prices, seasons, Number($('confidence').value));
+  const level = Number($('confidence').value);
+  const snapshot = archive.entries.find(e => e.origin === data.prices.at(-1).date);
+  result = snapshot?.forecasts[Math.round(level * 100)] || forecast(data.prices, seasons, level, liveErrorsFrom(archive, seasons, data.prices.at(-1).date));
   const last = data.prices.at(-1), previous = data.prices.at(-2), end = result.rows.at(-1);
   const season = seasonFor(last.date, seasons);
   const currentSeason = data.prices.filter(p => p.date >= season.priceStart);
@@ -66,13 +81,13 @@ function render() {
   $('season-low').textContent = money(low);
   $('season-position').textContent = `${pct(last.price / low - 1)} above season low`;
   $('season').textContent = `${season.name} · price day ${Math.round((Date.parse(last.date) - Date.parse(season.priceStart)) / 86400000) + 1}`;
-  const level = Math.round(result.level * 100);
-  $('range-label').textContent = level + '%';
-  $('range-heading').textContent = level + '% prediction range';
-  $('table-note').textContent = `Ranges target ${level}% coverage; actual historical coverage is shown below. Each probability compares that day's price with ${money(last.price)}. Historical error bias can make these probabilities differ from the estimate's direction.`;
+  const levelPercent = Math.round(result.level * 100);
+  $('range-label').textContent = levelPercent + '%';
+  $('range-heading').textContent = levelPercent + '% prediction range';
+  $('table-note').textContent = `Ranges target ${levelPercent}% coverage; actual historical coverage is shown below. Each probability compares that day's price with ${money(last.price)}. Historical error bias can make these probabilities differ from the estimate's direction.`;
   $('forecast-rows').innerHTML = result.rows.map(p => `<tr><td><strong>${fmtDate(p.date)}</strong><span class="day-name">${new Intl.DateTimeFormat('en', { weekday: 'short', timeZone: 'UTC' }).format(new Date(p.date + 'T00:00:00Z'))}</span></td><td><strong>${money(p.price)}</strong></td><td>${p.low == null ? 'Insufficient history' : `${money(p.low)} – ${money(p.high)}`}</td><td class="${p.price <= last.price ? 'down' : 'up'}">${pct(p.price / last.price - 1)}</td><td><span class="probability">${p.cheaper == null ? '—' : p.cheaper + '%'}</span></td></tr>`).join('');
   const validation = result.validation.at(-1);
-  $('validation').innerHTML = `<div><strong>${validation.coverage == null ? '—' : Math.round(validation.coverage * 100) + '%'}</strong><span>Day seven historical coverage (${level}% target)</span></div><div><strong>${validation.coverageSamples}</strong><span>Day seven coverage tests</span></div><div><strong>${(validation.modelMAPE * 100).toFixed(1)}%</strong><span>Day seven average forecast error</span></div><div><strong>${(validation.baselineMAPE * 100).toFixed(1)}%</strong><span>Unchanged-price baseline error</span></div>`;
+  $('validation').innerHTML = `<div><strong>${validation.coverage == null ? '—' : Math.round(validation.coverage * 100) + '%'}</strong><span>Day seven backtest coverage (${levelPercent}% target)</span></div><div><strong>${validation.coverageSamples}</strong><span>Day seven backtest coverage tests</span></div><div><strong>${(validation.modelMAPE * 100).toFixed(1)}%</strong><span>Day seven backtest forecast error</span></div><div><strong>${(validation.baselineMAPE * 100).toFixed(1)}%</strong><span>Unchanged-price baseline error</span></div>`;
   let assessment = $('assessment');
   if (!assessment) { assessment = document.createElement('p'); assessment.id = 'assessment'; assessment.className = 'fine'; $('validation').after(assessment); }
   assessment.textContent = validation.modelMAPE > validation.baselineMAPE ? 'Preliminary results: this model has not beaten an unchanged-price forecast at the seven-day horizon. Treat its outlook as exploratory.' : 'Preliminary results: this model has lower historical seven-day error than the unchanged-price baseline. This does not establish future accuracy.';
@@ -87,7 +102,7 @@ function render() {
     ['Season context', `${currentSeason.length} readings`, 'Recent price levels use the current price season. Historical errors that cross a known wipe are excluded.']
   ];
   $('signals').innerHTML = signals.map(([title, value, description]) => `<div class="signal"><h3>${title}</h3><span>${value}</span><p>${description}</p></div>`).join('');
-  chart(); calculator();
+  chart(); calculator(); renderLearning(snapshot);
 }
 function freshness() {
   const today = new Date().toISOString().slice(0, 10), last = data.prices.at(-1);
@@ -103,12 +118,13 @@ function freshness() {
   $('freshness').textContent = `${data.prices.length} daily observations · latest ${last.date} UTC · sources checked ${new Date(data.checkedAt).toLocaleString(undefined, { timeZoneName: 'short' })}.`;
 }
 try {
-  const responses = await Promise.all(['data/prices.json', 'data/seasons.json'].map(async url => {
+  const responses = await Promise.all(['data/prices.json', 'data/seasons.json', 'data/forecasts.json'].map(async url => {
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
     return response.json();
   }));
-  [data, seasons] = responses;
+  [data, seasons, archive] = responses;
+  validateArchive(archive);
   render(); freshness();
   for (const source of data.sources) {
     const li = document.createElement('li'), a = document.createElement('a'), status = document.createElement('span');
@@ -122,7 +138,8 @@ try {
   $('cash').addEventListener('input', calculator);
   setInterval(freshness, 60000);
   $('download').addEventListener('click', () => {
-    const csv = ['date_utc,estimate_cash_per_bar,lower,upper,interval_percent,chance_cheaper_percent,calibration_samples', ...result.rows.map(p => [p.date, p.price, p.low, p.high, Math.round(result.level * 100), p.cheaper, p.samples].join(','))].join('\r\n');
+    const snapshot = archive.entries.find(e => e.origin === data.prices.at(-1).date);
+    const csv = ['origin_utc,issued_at,target_utc,estimate_cash_per_bar,lower,upper,interval_percent,chance_cheaper_percent,backtest_samples,live_samples,live_weight', ...result.rows.map(p => [data.prices.at(-1).date, snapshot?.issuedAt || '', p.date, p.price, p.low, p.high, Math.round(result.level * 100), p.cheaper, p.calibration.backtestSamples, p.calibration.liveSamples, p.calibration.liveWeight].join(','))].join('\r\n');
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     const a = document.createElement('a'); a.href = url; a.download = `wardogs-forecast-${data.prices.at(-1).date}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   });

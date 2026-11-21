@@ -44,19 +44,33 @@ The central forecast works in log prices. Each future day combines:
 
 Daily returns require consecutive dates and exclude known season boundaries. There is no assumed economic mechanism or claim that player counts, bans, patch notes, or cosmetic demand causally predict prices. Those factors need reliable paired histories before being added. No future wipe is assumed; a surprise wipe can invalidate forecasts.
 
-For every historical origin after 14 observations, forecasts are calculated using only preceding observations. Errors are recorded separately for horizons 1–7; targets spanning a known season boundary or missing a required date are excluded. Displayed ranges apply empirical signed log-error quantiles to the central estimate, including the estimate in the range. At least eight errors are required. The cheaper-price percentage counts historical residual-adjusted forecasts below the latest observed price, with add-one smoothing. It is an approximate model probability, not a calibrated guarantee.
+For every historical origin after 14 observations, forecasts are calculated using only preceding observations. Errors are recorded separately for horizons 1–7; targets spanning a known season boundary or missing a required date are excluded. Displayed ranges apply empirical signed log-error quantiles to the central estimate, including the estimate in the range. At least eight errors are required. The cheaper-price percentage counts residual-adjusted forecasts below the latest observed price, with add-one smoothing. It is an approximate model probability, not a calibrated guarantee.
 
 An **80% prediction range** targets 80% coverage of individual daily outcomes; it is not an 80% probability of an exact prediction, nor an 80% simultaneous range for the whole week. The 95% range is especially uncertain with so little data. Forecast errors overlap in time and are not independent.
 
 Historical coverage tests use expanding calibration, with at least ten errors whose target prices were already known at that historical origin. The dashboard reports coverage and sample counts per horizon, model mean absolute percentage error, and an unchanged-price baseline. These measurements may show the model failing to beat the baseline; the dashboard reports that result without hiding it. Parameters are heuristic and have not been validated on an independent long-term holdout.
 
+## Learning from saved forecasts
+
+Every refresh also updates `data/forecasts.json`, a permanent forecast ledger committed to Git. `npm run track` can run this step separately using the current observations. A successful refresh with a current UTC-day observation saves one seven-day outlook, including both interval levels, cheaper-price probabilities, issue timestamp, model version, calibration counts and historical validation. Reruns on the same UTC day reuse that outlook exactly. Missing, stale or disputed latest observations do not create a backdated guess. Older days are never backfilled as if predictions existed then.
+
+On later refreshes, each available, undisputed actual price is attached once to the corresponding saved target. Original guesses and outcomes remain unchanged. Missing or disputed actuals stay pending until available. The first saved outlook's tomorrow guess can be scored after the next daily reading; its seven-day guess takes seven days to resolve. No live scores are claimed before these outcomes arrive.
+
+Calibration uses signed log errors from **actual saved predictions**, separately for each horizon and only for the same `MODEL_VERSION`. It excludes known wipe crossings and outcomes not yet observed at the time of issue. Matching origin/target pairs are removed from the historical pool to avoid counting the same error twice. Historical errors provide a starting prior with at most 20 effective observations; each of up to 180 most recent live errors per horizon adds weight 1. The live influence is therefore `live_count / (min(20, backtest_count) + live_count)`. Weighted empirical quantiles set the ranges, and weighted below-latest outcomes set cheaper-price probabilities with add-one smoothing. Before any live errors exist, the original unweighted backtest calibration is retained.
+
+The price formula itself is unchanged: this is online uncertainty calibration, not an automatic guarantee of better point predictions. A future formula change must bump `MODEL_VERSION`; previous forecasts remain visible but their errors are excluded from the new model's learning. Changing season configuration can exclude newly identified wipe crossings without changing archived guesses.
+
+The dashboard separates live scores from reconstructed historical tests. The live scorecard reports original-range coverage, mean absolute percentage price error, and Brier score for cheaper-price probabilities (mean squared probability error; 0 is best). Wipe-crossing and older-model predictions remain in the scorecard but do not train current confidence. Overlapping horizons share actual prices and are not independent trials. Export the full JSON archive from the learning section or download the current forecast CSV with its issue timestamp and calibration counts.
+
 ## Files
 
 - `web/`: dashboard, chart, converter and CSV export.
 - `lib/model.mjs`: shared forecast, validation and UTC date logic.
+- `lib/archive.mjs`, `scripts/track.mjs`: immutable forecast recording, outcome scoring and live calibration.
 - `lib/sources.mjs`, `scripts/refresh.mjs`: price ingestion.
 - `data/`: attributed observations and known season boundaries.
 - `test/model.test.mjs`: range invariants, temporal isolation, wipe exclusion, parser and missing-data checks.
+- `test/archive.test.mjs`: immutable records, rerun safety, actual-outcome scoring, stale/conflicting data handling, temporal isolation and live learning.
 - `.github/workflows/pages.yml`: automatic refresh, checks and Pages deployment.
 
 Independent fan project; not affiliated with BULKHEAD.

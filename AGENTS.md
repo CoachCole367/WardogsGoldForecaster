@@ -6,4 +6,5 @@
 - `web/` is the website; `lib/` contains shared forecasting and source parsing; `data/` contains attributed observations and season configuration. `dist/` is generated and ignored.
 - Keep UTC dates and positive integer cash prices. Never fabricate observations or silently replace conflicting history. Exclude returns across configured price-season boundaries.
 - Confidence means an empirical prediction interval, not the probability an exact price is correct. Keep historical validation free of future observations.
+- `data/forecasts.json` stores live forecasts. Never rewrite saved predictions or resolved outcomes, backfill guesses for known outcomes, or reset the archive on errors. Bump `MODEL_VERSION` if the price formula changes; only matching model versions share live errors.
 - Done: checks pass, source freshness and failures are visible, mobile and desktop layouts work, Pages deployment succeeds.

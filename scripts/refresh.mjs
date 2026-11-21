@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { parseHistory } from '../lib/sources.mjs';
 import { validatePrices } from '../lib/model.mjs';
+import { trackForecasts } from './track.mjs';
 
 const sources = ['https://wardogstats.app/gold', 'https://wardogs.tools/gold'];
 const now = new Date();
@@ -34,4 +35,5 @@ const data = { checkedAt: now.toISOString(), sources: results.map(({ prices, ...
 await writeFile('data/prices.json', JSON.stringify(data, null, 2) + '\n');
 console.log(`${prices.length} observations; latest ${prices.at(-1).date}; ${results.filter(r => r.ok).length}/${sources.length} sources available`);
 if (warnings.length) console.warn(warnings.join('\n'));
+await trackForecasts(data, now.toISOString());
 if (!results.some(r => r.ok)) process.exitCode = 1;

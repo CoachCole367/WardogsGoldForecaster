@@ -1,7 +1,9 @@
 import { cp, mkdir, readFile } from 'node:fs/promises';
 import { validatePrices, forecast } from '../lib/model.mjs';
+import { validateArchive } from '../lib/archive.mjs';
 const data = JSON.parse(await readFile('data/prices.json', 'utf8'));
 const seasons = JSON.parse(await readFile('data/seasons.json', 'utf8'));
+validateArchive(JSON.parse(await readFile('data/forecasts.json', 'utf8')));
 validatePrices(data.prices);
 forecast(data.prices, seasons);
 await mkdir('dist', { recursive: true });

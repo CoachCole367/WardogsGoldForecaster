@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "origin": "2026-11-21",
+      "issuedAt": "2026-11-21T01:34:52.164Z",
+      "modelVersion": "momentum-season-v1",
+      "calibrationVersion": "archived-errors-v1",
+      "baselinePrice": 651250,
+      "forecasts": {
+        "80": {
+          "rows": [
+            {
+              "date": "2026-11-22",
+              "price": 648889,
+              "low": 424028,
+              "high": 834053,
+              "cheaper": 61,
+              "samples": 57,
+              "calibration": {
+                "backtestSamples": 57,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-23",
+              "price": 658929,
+              "low": 333740,
+              "high": 887818,
+              "cheaper": 55,
+              "samples": 54,
+              "calibration": {
+                "backtestSamples": 54,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-24",
+              "price": 668484,
+              "low": 302868,
+              "high": 952929,
+              "cheaper": 58,
+              "samples": 51,
+              "calibration": {
+                "backtestSamples": 51,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-25",
+              "price": 666285,
+              "low": 283685,
+              "high": 975160,
+              "cheaper": 66,
+              "samples": 48,
+              "calibration": {
+                "backtestSamples": 48,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-26",
+              "price": 672480,
+              "low": 272826,
+              "high": 1009299,
+              "cheaper": 68,
+              "samples": 45,
+              "calibration": {
+                "backtestSamples": 45,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-27",
+              "price": 670446,
+              "low": 228273,
+              "high": 848102,
+              "cheaper": 73,
+              "samples": 42,
+              "calibration": {
+                "backtestSamples": 42,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-28",
+              "price": 677558,
+              "low": 202286,
+              "high": 858313,
+              "cheaper": 80,
+              "samples": 39,
+              "calibration": {
+                "backtestSamples": 39,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            }
+          ],
+          "validation": [
+            {
+              "horizon": 1,
+              "samples": 57,
+              "coverage": 0.7872340425531915,
+              "coverageSamples": 47,
+              "modelMAPE": 0.2302910260080288,
+              "baselineMAPE": 0.22092117152786414
+            },
+            {
+              "horizon": 2,
+              "samples": 54,
+              "coverage": 0.813953488372093,
+              "coverageSamples": 43,
+              "modelMAPE": 0.41879355748173885,
+              "baselineMAPE": 0.40667167391166587
+            },
+            {
+              "horizon": 3,
+              "samples": 51,
+              "coverage": 0.8717948717948718,
+              "coverageSamples": 39,
+              "modelMAPE": 0.5806337916892285,
+              "baselineMAPE": 0.5691010959710503
+            },
+            {
+              "horizon": 4,
+              "samples": 48,
+              "coverage": 0.8,
+              "coverageSamples": 35,
+              "modelMAPE": 0.7530743102239241,
+              "baselineMAPE": 0.7365987202785647
+            },
+            {
+              "horizon": 5,
+              "samples": 45,
+              "coverage": 0.8387096774193549,
+              "coverageSamples": 31,
+              "modelMAPE": 0.9540869996187957,
+              "baselineMAPE": 0.9164751222469214
+            },
+            {
+              "horizon": 6,
+              "samples": 42,
+              "coverage": 0.7777777777777778,
+              "coverageSamples": 27,
+              "modelMAPE": 1.0953111522163044,
+              "baselineMAPE": 1.0536180389919245
+            },
+            {
+              "horizon": 7,
+              "samples": 39,
+              "coverage": 0.7391304347826086,
+              "coverageSamples": 23,
+              "modelMAPE": 1.2483769637093847,
+              "baselineMAPE": 1.1671506895322143
+            }
+          ],
+          "level": 0.8
+        },
+        "95": {
+          "rows": [
+            {
+              "date": "2026-11-22",
+              "price": 648889,
+              "low": 327718,
+              "high": 1166371,
+              "cheaper": 61,
+              "samples": 57,
+              "calibration": {
+                "backtestSamples": 57,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-23",
+              "price": 658929,
+              "low": 264330,
+              "high": 1436461,
+              "cheaper": 55,
+              "samples": 54,
+              "calibration": {
+                "backtestSamples": 54,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-24",
+              "price": 668484,
+              "low": 147082,
+              "high": 1249265,
+              "cheaper": 58,
+              "samples": 51,
+              "calibration": {
+                "backtestSamples": 51,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-25",
+              "price": 666285,
+              "low": 124107,
+              "high": 1173019,
+              "cheaper": 66,
+              "samples": 48,
+              "calibration": {
+                "backtestSamples": 48,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-26",
+              "price": 672480,
+              "low": 81847,
+              "high": 1055697,
+              "cheaper": 68,
+              "samples": 45,
+              "calibration": {
+                "backtestSamples": 45,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-27",
+              "price": 670446,
+              "low": 71392,
+              "high": 1239169,
+              "cheaper": 73,
+              "samples": 42,
+              "calibration": {
+                "backtestSamples": 42,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            },
+            {
+              "date": "2026-11-28",
+              "price": 677558,
+              "low": 70621,
+              "high": 1150913,
+              "cheaper": 80,
+              "samples": 39,
+              "calibration": {
+                "backtestSamples": 39,
+                "liveSamples": 0,
+                "liveWeight": 0
+              }
+            }
+          ],
+          "validation": [
+            {
+              "horizon": 1,
+              "samples": 57,
+              "coverage": 0.9361702127659575,
+              "coverageSamples": 47,
+              "modelMAPE": 0.2302910260080288,
+              "baselineMAPE": 0.22092117152786414
+            },
+            {
+              "horizon": 2,
+              "samples": 54,
+              "coverage": 0.9767441860465116,
+              "coverageSamples": 43,
+              "modelMAPE": 0.41879355748173885,
+              "baselineMAPE": 0.40667167391166587
+            },
+            {
+              "horizon": 3,
+              "samples": 51,
+              "coverage": 0.9487179487179487,
+              "coverageSamples": 39,
+              "modelMAPE": 0.5806337916892285,
+              "baselineMAPE": 0.5691010959710503
+            },
+            {
+              "horizon": 4,
+              "samples": 48,
+              "coverage": 0.9714285714285714,
+              "coverageSamples": 35,
+              "modelMAPE": 0.7530743102239241,
+              "baselineMAPE": 0.7365987202785647
+            },
+            {
+              "horizon": 5,
+              "samples": 45,
+              "coverage": 0.9354838709677419,
+              "coverageSamples": 31,
+              "modelMAPE": 0.9540869996187957,
+              "baselineMAPE": 0.9164751222469214
+            },
+            {
+              "horizon": 6,
+              "samples": 42,
+              "coverage": 0.8518518518518519,
+              "coverageSamples": 27,
+              "modelMAPE": 1.0953111522163044,
+              "baselineMAPE": 1.0536180389919245
+            },
+            {
+              "horizon": 7,
+              "samples": 39,
+              "coverage": 0.782608695652174,
+              "coverageSamples": 23,
+              "modelMAPE": 1.2483769637093847,
+              "baselineMAPE": 1.1671506895322143
+            }
+          ],
+          "level": 0.95
+        }
+      },
+      "outcomes": []
+    }
+  ]
+}

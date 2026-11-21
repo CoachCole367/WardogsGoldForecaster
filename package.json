@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "refresh": "node scripts/refresh.mjs",
+    "track": "node scripts/track.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test",
     "lint": "node scripts/check.mjs"
