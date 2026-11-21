@@ -7,4 +7,5 @@
 - Keep UTC dates and positive integer cash prices. Never fabricate observations or silently replace conflicting history. Exclude returns across configured price-season boundaries.
 - Confidence means an empirical prediction interval, not the probability an exact price is correct. Keep historical validation free of future observations.
 - `data/forecasts.json` stores live forecasts. Never rewrite saved predictions or resolved outcomes, backfill guesses for known outcomes, or reset the archive on errors. Bump `MODEL_VERSION` if the price formula changes; only matching model versions share live errors.
+- User-authorized historical simulations belong in `data/replay.json`, explicitly marked as replay. Reveal one price day at a time, including for learning and season context. Never mix simulated records into the live ledger. Preserve older model versions; a new version may issue a separate outlook on the same date.
 - Done: checks pass, source freshness and failures are visible, mobile and desktop layouts work, Pages deployment succeeds.

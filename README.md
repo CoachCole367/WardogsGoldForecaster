@@ -36,7 +36,7 @@ If fetching fails, retained observations remain available. The site prominently 
 
 ## Forecast method
 
-The central forecast works in log prices. Each future day combines:
+The raw forecast works in log prices. Each future day combines:
 
 - 25% of the mean of the last five available daily log returns (capped at ±0.12), decaying by 0.7 per future day.
 - An 8% pull toward the mean log price of up to 14 observations in the current price season.
@@ -56,9 +56,17 @@ Every refresh also updates `data/forecasts.json`, a permanent forecast ledger co
 
 On later refreshes, each available, undisputed actual price is attached once to the corresponding saved target. Original guesses and outcomes remain unchanged. Missing or disputed actuals stay pending until available. The first saved outlook's tomorrow guess can be scored after the next daily reading; its seven-day guess takes seven days to resolve. No live scores are claimed before these outcomes arrive.
 
-Calibration uses signed log errors from **actual saved predictions**, separately for each horizon and only for the same `MODEL_VERSION`. It excludes known wipe crossings and outcomes not yet observed at the time of issue. Matching origin/target pairs are removed from the historical pool to avoid counting the same error twice. Historical errors provide a starting prior with at most 20 effective observations; each of up to 180 most recent live errors per horizon adds weight 1. The live influence is therefore `live_count / (min(20, backtest_count) + live_count)`. Weighted empirical quantiles set the ranges, and weighted below-latest outcomes set cheaper-price probabilities with add-one smoothing. Before any live errors exist, the original unweighted backtest calibration is retained.
+Calibration uses signed log errors relative to the raw estimate, separately for each horizon and only for the same `MODEL_VERSION`. Both actual published guesses and the historical replay described below inform today's algorithm. Known wipe crossings and outcomes not yet observed at issue time are excluded. Each origin/target pair counts once, with live evidence preferred over replay. Matching reconstructed backtest errors are removed to avoid double counting. Up to 180 most recent recorded errors per horizon are used: each live error has weight 1 and each simulated error weight 0.5. Unmatched historical errors supply at most 20 effective observations. The dashboard shows both sample counts and influence. Weighted empirical quantiles set the ranges, and weighted below-latest outcomes set cheaper-price probabilities with add-one smoothing. Before any recorded errors exist, the original unweighted backtest calibration is retained.
 
-The price formula itself is unchanged: this is online uncertainty calibration, not an automatic guarantee of better point predictions. A future formula change must bump `MODEL_VERSION`; previous forecasts remain visible but their errors are excluded from the new model's learning. Changing season configuration can exclude newly identified wipe crossings without changing archived guesses.
+The current v2 algorithm also corrects systematic price bias. It takes the median signed error, caps it at ±0.35 log units, and shrinks it by `recorded_weight / (recorded_weight + 20)` before adjusting the raw estimate. Bounds remain based on the raw error distribution, avoiding applying bias twice. Forecast CSVs include raw estimates and the learned adjustment. Improved accuracy or narrower ranges are not guaranteed. A formula change must bump `MODEL_VERSION`; previous live forecasts remain untouched but do not train the new model. A new version may save a separate outlook on the same day. Changing season configuration can exclude newly identified wipe crossings without changing live guesses.
+
+## Walk-forward replay from day one
+
+`lib/replay.mjs` reveals the recorded history one observation at a time, starting on the very first day. At each step it resolves only earlier predictions whose target is that revealed date, gathers only errors available by that simulated time, and then predicts the following seven days. Both observations and season context are restricted to what that step has revealed. The first day's raw guess is necessarily the only known price; confidence is left unavailable until eight eligible errors exist for that horizon.
+
+Replay guesses stop before the first genuinely published forecast date, keeping their origins separate from live guesses. Later actual readings can still resolve pending replay targets. Replay errors immediately train new live forecasts; this is not just a historical display. `npm run track` and the daily refresh rebuild `data/replay.json` deterministically and use it before issuing the current model's live outlook. Old live predictions are never rewritten when a replay is regenerated.
+
+`data/replay.json` is explicitly marked as simulation, with hypothetical issue times, not proof that those predictions were published then. A scorecard selector keeps simulated performance separate from published performance. Download either archive from the dashboard. The replay uses today's model design and the currently recorded historical dataset; it is not an independent holdout or proof of what the data provider exposed on those past dates. Future-perturbation and history-extension tests ensure later prices do not affect earlier simulated guesses.
 
 The dashboard separates live scores from reconstructed historical tests. The live scorecard reports original-range coverage, mean absolute percentage price error, and Brier score for cheaper-price probabilities (mean squared probability error; 0 is best). Wipe-crossing and older-model predictions remain in the scorecard but do not train current confidence. Overlapping horizons share actual prices and are not independent trials. Export the full JSON archive from the learning section or download the current forecast CSV with its issue timestamp and calibration counts.
 
@@ -67,10 +75,12 @@ The dashboard separates live scores from reconstructed historical tests. The liv
 - `web/`: dashboard, chart, converter and CSV export.
 - `lib/model.mjs`: shared forecast, validation and UTC date logic.
 - `lib/archive.mjs`, `scripts/track.mjs`: immutable forecast recording, outcome scoring and live calibration.
+- `lib/replay.mjs`, `data/replay.json`: day-one walk-forward simulation that trains price bias and confidence.
 - `lib/sources.mjs`, `scripts/refresh.mjs`: price ingestion.
 - `data/`: attributed observations and known season boundaries.
 - `test/model.test.mjs`: range invariants, temporal isolation, wipe exclusion, parser and missing-data checks.
 - `test/archive.test.mjs`: immutable records, rerun safety, actual-outcome scoring, stale/conflicting data handling, temporal isolation and live learning.
+- `test/replay.test.mjs`: day-one cold start, future-price isolation, expanding history, real training effects, deduplication and season knowledge isolation.
 - `.github/workflows/pages.yml`: automatic refresh, checks and Pages deployment.
 
 Independent fan project; not affiliated with BULKHEAD.

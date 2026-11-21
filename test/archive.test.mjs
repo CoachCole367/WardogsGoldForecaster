@@ -54,12 +54,13 @@ test('future and late-known outcomes cannot leak into past confidence', () => {
   assert.equal(liveErrorsFrom(archive, seasons, '2026-02-15', '2026-02-15T00:10:00.000Z').length, 0);
   assert.equal(liveErrorsFrom(archive, seasons, '2026-02-15', '2026-02-15T00:20:00.000Z').length, 1);
 });
-test('learning changes future ranges/probability without changing the price formula', () => {
+test('learning adjusts estimates, ranges and probability while retaining the raw estimate', () => {
   const { archive, data: latest } = settled();
   const live = liveErrorsFrom(archive, seasons, '2026-02-15');
   const base = forecast(latest.prices, seasons, 0.8);
   const learned = forecast(latest.prices, seasons, 0.8, live);
-  assert.deepEqual(base.rows.map(r => r.price), learned.rows.map(r => r.price));
+  assert.deepEqual(base.rows.map(r => r.rawPrice), learned.rows.map(r => r.rawPrice));
+  assert.notEqual(base.rows[0].price, learned.rows[0].price);
   assert.notDeepEqual([base.rows[0].low, base.rows[0].high, base.rows[0].cheaper], [learned.rows[0].low, learned.rows[0].high, learned.rows[0].cheaper]);
   assert.equal(learned.rows[0].calibration.liveWeight, 1 / 21);
   assert.equal(learned.rows[0].calibration.liveSamples, 1);
@@ -95,4 +96,12 @@ test('malformed or duplicate archives fail instead of resetting', () => {
   assert.throws(() => validateArchive({ schemaVersion: 2, entries: [] }));
   const archive = seed(); archive.entries.push(structuredClone(archive.entries[0]));
   assert.throws(() => validateArchive(archive));
+});
+test('new algorithm version can issue today without rewriting the old version', () => {
+  const archive = seed(); archive.entries[0].modelVersion = 'older-version';
+  const original = structuredClone(archive.entries[0]);
+  const updated = updateArchive(archive, data(), seasons, '2026-02-14T12:00:00.000Z');
+  assert.equal(updated.entries.length, 2);
+  assert.deepEqual(updated.entries[0], original);
+  assert.equal(updated.entries[1].modelVersion, MODEL_VERSION);
 });
