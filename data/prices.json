@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-23T07:52:04.446Z",
+  "checkedAt": "2026-11-24T10:04:38.657Z",
   "sources": [
     {
       "url": "https://wardogstats.app/gold",
       "ok": true,
-      "latest": "2026-11-23"
+      "latest": "2026-11-24"
     },
     {
       "url": "https://wardogs.tools/gold",
       "ok": true,
-      "latest": "2026-11-23"
+      "latest": "2026-11-24"
     }
   ],
   "warnings": [],
@@ -387,6 +387,11 @@
     {
       "date": "2026-11-23",
       "price": 472160,
+      "source": "https://wardogstats.app/gold"
+    },
+    {
+      "date": "2026-11-24",
+      "price": 383870,
       "source": "https://wardogstats.app/gold"
     }
   ]
