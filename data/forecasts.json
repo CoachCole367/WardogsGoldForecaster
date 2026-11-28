@@ -347,6 +347,11 @@
           "horizon": 6,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 7,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -752,6 +757,11 @@
           "horizon": 6,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 7,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -1152,6 +1162,11 @@
           "horizon": 5,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 6,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -1547,6 +1562,11 @@
           "horizon": 4,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 5,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -1937,6 +1957,11 @@
           "horizon": 3,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 4,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -2322,6 +2347,11 @@
           "horizon": 2,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 3,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -2702,6 +2732,11 @@
           "horizon": 1,
           "actualPrice": 343400,
           "observedAt": "2026-11-27T08:47:42.348Z"
+        },
+        {
+          "horizon": 2,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
         }
       ]
     },
@@ -3072,6 +3107,386 @@
               "coverageSamples": 29,
               "modelMAPE": 1.2928674059742329,
               "baselineMAPE": 1.2186648794449835
+            }
+          ],
+          "level": 0.95
+        }
+      },
+      "outcomes": [
+        {
+          "horizon": 1,
+          "actualPrice": 320050,
+          "observedAt": "2026-11-28T08:01:58.699Z"
+        }
+      ]
+    },
+    {
+      "origin": "2026-11-28",
+      "issuedAt": "2026-11-28T08:01:58.699Z",
+      "modelVersion": "momentum-season-v2",
+      "calibrationVersion": "replay-bias-v2",
+      "baselinePrice": 320050,
+      "forecasts": {
+        "80": {
+          "rows": [
+            {
+              "date": "2026-11-29",
+              "price": 320151,
+              "rawPrice": 328058,
+              "low": 214837,
+              "high": 404253,
+              "cheaper": 52,
+              "samples": 77,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 7,
+                "replaySamples": 70,
+                "liveWeight": 0.16666666666666666,
+                "replayWeight": 0.8333333333333334,
+                "biasAdjustment": -0.0241032692295009
+              }
+            },
+            {
+              "date": "2026-11-30",
+              "price": 322235,
+              "rawPrice": 340114,
+              "low": 169984,
+              "high": 457218,
+              "cheaper": 52,
+              "samples": 74,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 6,
+                "replaySamples": 68,
+                "liveWeight": 0.15,
+                "replayWeight": 0.85,
+                "biasAdjustment": -0.05256864810624218
+              }
+            },
+            {
+              "date": "2026-12-01",
+              "price": 315350,
+              "rawPrice": 351729,
+              "low": 159356,
+              "high": 475982,
+              "cheaper": 59,
+              "samples": 71,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 5,
+                "replaySamples": 66,
+                "liveWeight": 0.13157894736842105,
+                "replayWeight": 0.868421052631579,
+                "biasAdjustment": -0.10343006884773498
+              }
+            },
+            {
+              "date": "2026-12-02",
+              "price": 297732,
+              "rawPrice": 355732,
+              "low": 156837,
+              "high": 510384,
+              "cheaper": 63,
+              "samples": 68,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 4,
+                "replaySamples": 64,
+                "liveWeight": 0.1111111111111111,
+                "replayWeight": 0.8888888888888888,
+                "biasAdjustment": -0.16304371828807063
+              }
+            },
+            {
+              "date": "2026-12-03",
+              "price": 293831,
+              "rawPrice": 366272,
+              "low": 157250,
+              "high": 511349,
+              "cheaper": 67,
+              "samples": 65,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 3,
+                "replaySamples": 62,
+                "liveWeight": 0.08823529411764706,
+                "replayWeight": 0.9117647058823529,
+                "biasAdjustment": -0.19777837618630523
+              }
+            },
+            {
+              "date": "2026-12-04",
+              "price": 299710,
+              "rawPrice": 371742,
+              "low": 136398,
+              "high": 459818,
+              "cheaper": 65,
+              "samples": 62,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 2,
+                "replaySamples": 60,
+                "liveWeight": 0.0625,
+                "replayWeight": 0.9375,
+                "biasAdjustment": -0.1937687084211106
+              }
+            },
+            {
+              "date": "2026-12-05",
+              "price": 308562,
+              "rawPrice": 380666,
+              "low": 115024,
+              "high": 404681,
+              "cheaper": 69,
+              "samples": 59,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 1,
+                "replaySamples": 58,
+                "liveWeight": 0.03333333333333333,
+                "replayWeight": 0.9666666666666667,
+                "biasAdjustment": -0.18941575402981292
+              }
+            }
+          ],
+          "validation": [
+            {
+              "horizon": 1,
+              "samples": 64,
+              "coverage": 0.7962962962962963,
+              "coverageSamples": 54,
+              "modelMAPE": 0.2327880891669708,
+              "baselineMAPE": 0.22450194538998358
+            },
+            {
+              "horizon": 2,
+              "samples": 61,
+              "coverage": 0.8,
+              "coverageSamples": 50,
+              "modelMAPE": 0.4195847852489706,
+              "baselineMAPE": 0.40903266403562105
+            },
+            {
+              "horizon": 3,
+              "samples": 58,
+              "coverage": 0.8695652173913043,
+              "coverageSamples": 46,
+              "modelMAPE": 0.5818789777790156,
+              "baselineMAPE": 0.5695366334926739
+            },
+            {
+              "horizon": 4,
+              "samples": 55,
+              "coverage": 0.8095238095238095,
+              "coverageSamples": 42,
+              "modelMAPE": 0.7606028185507383,
+              "baselineMAPE": 0.7381872745817875
+            },
+            {
+              "horizon": 5,
+              "samples": 52,
+              "coverage": 0.8421052631578947,
+              "coverageSamples": 38,
+              "modelMAPE": 0.9708061326737246,
+              "baselineMAPE": 0.9296338445061872
+            },
+            {
+              "horizon": 6,
+              "samples": 49,
+              "coverage": 0.7941176470588235,
+              "coverageSamples": 34,
+              "modelMAPE": 1.1277168854274109,
+              "baselineMAPE": 1.084747718147467
+            },
+            {
+              "horizon": 7,
+              "samples": 46,
+              "coverage": 0.7666666666666667,
+              "coverageSamples": 30,
+              "modelMAPE": 1.2890450267751912,
+              "baselineMAPE": 1.214668649598671
+            }
+          ],
+          "level": 0.8
+        },
+        "95": {
+          "rows": [
+            {
+              "date": "2026-11-29",
+              "price": 320151,
+              "rawPrice": 328058,
+              "low": 187808,
+              "high": 524924,
+              "cheaper": 52,
+              "samples": 77,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 7,
+                "replaySamples": 70,
+                "liveWeight": 0.16666666666666666,
+                "replayWeight": 0.8333333333333334,
+                "biasAdjustment": -0.0241032692295009
+              }
+            },
+            {
+              "date": "2026-11-30",
+              "price": 322235,
+              "rawPrice": 340114,
+              "low": 145175,
+              "high": 709218,
+              "cheaper": 52,
+              "samples": 74,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 6,
+                "replaySamples": 68,
+                "liveWeight": 0.15,
+                "replayWeight": 0.85,
+                "biasAdjustment": -0.05256864810624218
+              }
+            },
+            {
+              "date": "2026-12-01",
+              "price": 315350,
+              "rawPrice": 351729,
+              "low": 76073,
+              "high": 679998,
+              "cheaper": 59,
+              "samples": 71,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 5,
+                "replaySamples": 66,
+                "liveWeight": 0.13157894736842105,
+                "replayWeight": 0.868421052631579,
+                "biasAdjustment": -0.10343006884773498
+              }
+            },
+            {
+              "date": "2026-12-02",
+              "price": 297732,
+              "rawPrice": 355732,
+              "low": 65007,
+              "high": 627411,
+              "cheaper": 63,
+              "samples": 68,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 4,
+                "replaySamples": 64,
+                "liveWeight": 0.1111111111111111,
+                "replayWeight": 0.8888888888888888,
+                "biasAdjustment": -0.16304371828807063
+              }
+            },
+            {
+              "date": "2026-12-03",
+              "price": 293831,
+              "rawPrice": 366272,
+              "low": 41959,
+              "high": 575363,
+              "cheaper": 67,
+              "samples": 65,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 3,
+                "replaySamples": 62,
+                "liveWeight": 0.08823529411764706,
+                "replayWeight": 0.9117647058823529,
+                "biasAdjustment": -0.19777837618630523
+              }
+            },
+            {
+              "date": "2026-12-04",
+              "price": 299710,
+              "rawPrice": 371742,
+              "low": 38924,
+              "high": 691966,
+              "cheaper": 65,
+              "samples": 62,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 2,
+                "replaySamples": 60,
+                "liveWeight": 0.0625,
+                "replayWeight": 0.9375,
+                "biasAdjustment": -0.1937687084211106
+              }
+            },
+            {
+              "date": "2026-12-05",
+              "price": 308562,
+              "rawPrice": 380666,
+              "low": 39716,
+              "high": 646266,
+              "cheaper": 69,
+              "samples": 59,
+              "calibration": {
+                "backtestSamples": 0,
+                "liveSamples": 1,
+                "replaySamples": 58,
+                "liveWeight": 0.03333333333333333,
+                "replayWeight": 0.9666666666666667,
+                "biasAdjustment": -0.18941575402981292
+              }
+            }
+          ],
+          "validation": [
+            {
+              "horizon": 1,
+              "samples": 64,
+              "coverage": 0.9444444444444444,
+              "coverageSamples": 54,
+              "modelMAPE": 0.2327880891669708,
+              "baselineMAPE": 0.22450194538998358
+            },
+            {
+              "horizon": 2,
+              "samples": 61,
+              "coverage": 0.98,
+              "coverageSamples": 50,
+              "modelMAPE": 0.4195847852489706,
+              "baselineMAPE": 0.40903266403562105
+            },
+            {
+              "horizon": 3,
+              "samples": 58,
+              "coverage": 0.9565217391304348,
+              "coverageSamples": 46,
+              "modelMAPE": 0.5818789777790156,
+              "baselineMAPE": 0.5695366334926739
+            },
+            {
+              "horizon": 4,
+              "samples": 55,
+              "coverage": 0.9761904761904762,
+              "coverageSamples": 42,
+              "modelMAPE": 0.7606028185507383,
+              "baselineMAPE": 0.7381872745817875
+            },
+            {
+              "horizon": 5,
+              "samples": 52,
+              "coverage": 0.9473684210526315,
+              "coverageSamples": 38,
+              "modelMAPE": 0.9708061326737246,
+              "baselineMAPE": 0.9296338445061872
+            },
+            {
+              "horizon": 6,
+              "samples": 49,
+              "coverage": 0.8823529411764706,
+              "coverageSamples": 34,
+              "modelMAPE": 1.1277168854274109,
+              "baselineMAPE": 1.084747718147467
+            },
+            {
+              "horizon": 7,
+              "samples": 46,
+              "coverage": 0.8333333333333334,
+              "coverageSamples": 30,
+              "modelMAPE": 1.2890450267751912,
+              "baselineMAPE": 1.214668649598671
             }
           ],
           "level": 0.95
